@@ -1,208 +1,230 @@
-var correctAnswers = 0;
-var incorrectAnswers = 0;
-var totalQuestions = 0;
-var answeredQuestions = 0;
+let correctAnswers = 0;
+let incorrectAnswers = 0;
+let totalQuestions = 0;
+let answeredQuestions = 0;
+let questions = [];
+let timerIntervalId = null;
 
-// Função para carregar as perguntas do arquivo JSON com base no exame selecionado
 function loadQuestions() {
-    var selectedExams = document.querySelectorAll('input[name="exam"]:checked');
-    var selectedExamValues = Array.from(selectedExams).map(exam => exam.value);
+    const selectedExams = document.querySelectorAll('input[name="exam"]:checked');
+    const selectedExamValues = Array.from(selectedExams).map(exam => exam.value);
+    const questionDiv = document.getElementById('question');
+    const optionsDiv = document.getElementById('options');
+    const verifyButton = document.getElementById('verificar-resposta');
+    const messageDiv = document.getElementById('message');
 
-    // Limpar perguntas existentes antes de carregar novas perguntas
-    document.getElementById('question').innerHTML = '';
+    questionDiv.innerHTML = '';
+    optionsDiv.innerHTML = '';
+    verifyButton.disabled = true;
+    messageDiv.classList.add('hidden');
 
-    // Se nenhum exame estiver selecionado, não carregar perguntas
     if (selectedExamValues.length === 0) {
+        questionDiv.innerHTML = '<p class="text-gray-600">Por favor, selecione um exame para começar.</p>';
         return;
     }
 
-     // Iniciar o timer aqui
-    var duration = 60 * 60; // 5 minutos, por exemplo
-    var display = document.querySelector('#countdown'); // Substitua '#time' pelo ID do elemento HTML onde o tempo restante será exibido
-    startTimer(duration, display);
+    if (timerIntervalId) clearInterval(timerIntervalId);
 
-    // Carregar perguntas correspondentes aos exames selecionados
+    const duration = 60 * 60;
+    const display = document.querySelector('#countdown');
+    timerIntervalId = startTimer(duration, display);
+
+    questions = [];
+    let loadedExams = 0;
+
     selectedExamValues.forEach(exam => {
-        fetch(exam + '.json')
-            .then(response => response.json())
+        // Ajuste no caminho do fetch para lidar com arquivos locais
+        fetch(`./${exam}.json`)
+            .then(response => {
+                if (!response.ok) throw new Error('Erro ao carregar o exame');
+                return response.json();
+            })
             .then(data => {
-                questions = data;
-                totalQuestions = questions.length;
-                var questionsDiv = document.getElementById('question');
-                for (var i = 0; i < questions.length; i++) {
-                    var questionDiv = document.createElement('div');
-                    questionDiv.innerHTML = '<h2 style="font-size: 16px;">' + questions[i].question + '</h2>';
-                    for (var j = 0; j < questions[i].options.length; j++) {
-                        questionDiv.innerHTML += '<input type="radio" name="option' + i + '" value="' + j + '">' + questions[i].options[j] + '<br>';
-                    }
-                    questionsDiv.appendChild(questionDiv);
+                questions = questions.concat(data);
+                loadedExams++;
+                if (loadedExams === selectedExamValues.length) {
+                    totalQuestions = questions.length;
+                    answeredQuestions = 0;
+                    correctAnswers = 0;
+                    incorrectAnswers = 0;
+                    document.getElementById('counter').innerText = `0/${totalQuestions}`;
+                    document.getElementById('progressBar').style.width = '0%';
+                    document.getElementById('score').classList.add('hidden');
+                    loadNextQuestion();
                 }
-                document.getElementById('counter').innerText = '0/' + totalQuestions;
+            })
+            .catch(error => {
+                questionDiv.innerHTML = '<p class="text-red-600">Erro ao carregar as perguntas. Certifique-se de que os arquivos JSON estão no mesmo diretório e que você está executando a aplicação em um servidor local (ex.: Live Server no VSCode ou um servidor HTTP simples).</p>';
+                console.error(error);
             });
     });
 }
 
-// Função para verificar todas as respostas de uma só vez
-function checkAllAnswers() {
-    var options = document.querySelectorAll('input[type="radio"]:checked');
-    correctAnswers = 0;
-    incorrectAnswers = 0;
-    for (var i = 0; i < options.length; i++) {
-        var questionIndex = parseInt(options[i].name.replace('option', ''));
-        var optionIndex = parseInt(options[i].value);
-        if (optionIndex === questions[questionIndex].answer) {
-            correctAnswers++;
-        } else {
-            incorrectAnswers++;
-        }
-    }
-    answeredQuestions = correctAnswers + incorrectAnswers;
-    document.getElementById('counter').innerText = answeredQuestions + '/' + totalQuestions;
-    document.getElementById('score').innerHTML = '<b>Respostas corretas:</b> <span style="color: green;">' + correctAnswers + '</span><br><b>Respostas incorretas:</b> <span style="color: red;">' + incorrectAnswers + '</span>';
+function loadNextQuestion() {
+    const questionDiv = document.getElementById('question');
+    const optionsDiv = document.getElementById('options');
+    const verifyButton = document.getElementById('verificar-resposta');
+
     if (answeredQuestions >= totalQuestions) {
         showResultModal();
+        return;
     }
+
+    const question = questions[answeredQuestions];
+    // Removendo o número da string da pergunta e usando apenas o índice
+    const questionText = question.question.replace(/^\d+\.\s*/, '');
+    questionDiv.innerHTML = `<h2 class="text-lg font-semibold mb-4">${answeredQuestions + 1}. ${questionText}</h2>`;
+
+    optionsDiv.innerHTML = '';
+    question.options.forEach((option, index) => {
+        const optionHtml = `
+            <label class="option-label flex items-center gap-2 p-2 rounded-lg cursor-pointer">
+                <input type="radio" name="option${answeredQuestions}" value="${index}" class="h-4 w-4 text-blue-600" aria-label="Opção ${index + 1}">
+                <span>${option}</span>
+            </label>`;
+        optionsDiv.innerHTML += optionHtml;
+    });
+
+    verifyButton.disabled = true;
+    optionsDiv.querySelectorAll('input').forEach(input => {
+        input.addEventListener('change', () => {
+            verifyButton.disabled = false;
+        });
+    });
+
+    document.getElementById('counter').innerText = `${answeredQuestions}/${totalQuestions}`;
+    document.getElementById('progressBar').style.width = `${(answeredQuestions / totalQuestions) * 100}%`;
 }
 
-// Modificar a função checkAnswer para chamar checkAllAnswers
 function checkAnswer() {
-    checkAllAnswers();
-}
+    const selectedOption = document.querySelector(`input[name="option${answeredQuestions}"]:checked`);
+    const messageDiv = document.getElementById('message');
 
-// Função para carregar a próxima pergunta
-function loadNextQuestion() {
-    var questionDiv = document.getElementById('question');
-    questionDiv.innerHTML = ''; // Limpar a div da pergunta anterior
-    if (answeredQuestions < totalQuestions) {
-        var question = questions[answeredQuestions];
-        var questionHTML = '<h2>' + question.question + '</h2>';
-        for (var j = 0; j < question.options.length; j++) {
-            questionHTML += '<input type="radio" name="option' + answeredQuestions + '" value="' + j + '">' + question.options[j] + '<br>';
-        }
-        questionDiv.innerHTML = questionHTML;
+    if (!selectedOption) {
+        messageDiv.classList.remove('hidden');
+        messageDiv.innerHTML = 'Por favor, selecione uma opção.';
+        return;
     }
+
+    const questionIndex = answeredQuestions;
+    const optionIndex = parseInt(selectedOption.value);
+    const correctOptionIndex = questions[questionIndex].answer;
+
+    if (optionIndex === correctOptionIndex) {
+        correctAnswers++;
+        messageDiv.classList.remove('hidden');
+        messageDiv.classList.remove('bg-red-100', 'text-red-800');
+        messageDiv.classList.add('bg-green-100', 'text-green-800');
+        messageDiv.innerHTML = 'Resposta correta!';
+    } else {
+        incorrectAnswers++;
+        messageDiv.classList.remove('hidden');
+        messageDiv.classList.remove('bg-green-100', 'text-green-800');
+        messageDiv.classList.add('bg-red-100', 'text-red-800');
+        messageDiv.innerHTML = `Resposta incorreta! A correta é: ${questions[questionIndex].options[correctOptionIndex]}`;
+    }
+
+    answeredQuestions++;
+    document.getElementById('counter').innerText = `${answeredQuestions}/${totalQuestions}`;
+    document.getElementById('progressBar').style.width = `${(answeredQuestions / totalQuestions) * 100}%`;
+    document.getElementById('score').classList.remove('hidden');
+    document.getElementById('correct').innerText = correctAnswers;
+    document.getElementById('incorrect').innerText = incorrectAnswers;
+
+    setTimeout(() => {
+        messageDiv.classList.add('hidden');
+        loadNextQuestion();
+    }, 1000);
 }
 
-// Função para exibir o modal de resultado e marcar respostas corretas e incorretas
 function showResultModal() {
-    var modal = document.getElementById('resultModal');
-    var resultMessage = document.getElementById('resultMessage');
-    var percentage = (correctAnswers / totalQuestions) * 100;
-    var resultText = 'Você acertou ' + correctAnswers + ' de ' + totalQuestions + ' perguntas.';
-    resultText += ' Seu percentual de acerto é ' + percentage.toFixed(2) + '%.';
+    const modal = document.getElementById('resultModal');
+    const resultMessage = document.getElementById('resultMessage');
+    const percentage = (correctAnswers / totalQuestions) * 100;
+    let resultText = `
+        <p class="text-lg font-semibold">Resultado Final</p>
+        <p>Você acertou ${correctAnswers} de ${totalQuestions} perguntas.</p>
+        <p>Percentual de acerto: ${percentage.toFixed(2)}%</p>`;
 
-    var answersHTML = '<ul>';
-    for (var i = 0; i < totalQuestions; i++) {
-        var question = questions[i];
-        var selectedOptionIndex = parseInt(document.querySelector('input[name="option' + i + '"]:checked').value);
-        var correctOptionIndex = question.answer;
+    let answersHTML = '<h3 class="mt-4 font-semibold">Revisão das Respostas:</h3><ul class="mt-2">';
+    questions.forEach((question, i) => {
+        const selectedOption = document.querySelector(`input[name="option${i}"]:checked`);
+        const selectedOptionIndex = selectedOption ? parseInt(selectedOption.value) : -1;
+        const correctOptionIndex = question.answer;
+        const questionText = question.question.replace(/^\d+\.\s*/, '');
 
-        answersHTML += '<li>';
-        answersHTML += 'Questão ' + (i + 1) + ': ' + question.question + '<br>';
-        
-        for (var j = 0; j < question.options.length; j++) {
-            var option = question.options[j];
+        answersHTML += `<li class="mb-4">
+            <p class="font-medium">${i + 1}. ${questionText}</p>`;
+        question.options.forEach((option, j) => {
+            let style = '';
+            let label = '';
             if (j === correctOptionIndex) {
-                if (selectedOptionIndex === correctOptionIndex) {
-                    answersHTML += '<span style="color: green; font-weight: bold;">' + option + ' (Resposta Correta)</span>';
-                } else {
-                    answersHTML += '<span style="color: green; font-weight: bold;">' + option + ' (Resposta Correta)</span>';
-                }
-            } else if (j === selectedOptionIndex) {
-                answersHTML += '<span style="color: red; font-weight: bold;">' + option + ' (Opção Selecionada)</span>';
-            } else {
-                answersHTML += option;
+                style = 'text-green-600 font-bold';
+                label = selectedOptionIndex === correctOptionIndex ? ' (Correta)' : ' (Correta)';
+            } else if (j === selectedOptionIndex && selectedOptionIndex !== correctOptionIndex) {
+                style = 'text-red-600 font-bold';
+                label = ' (Selecionada)';
             }
-            answersHTML += '<br>';
-        }
-
+            answersHTML += `<p class="${style}">${option}${label}</p>`;
+        });
         answersHTML += '</li>';
-    }
+    });
     answersHTML += '</ul>';
 
-    resultMessage.innerHTML = resultText + '<br><br>' + answersHTML;
-    modal.style.display = 'block'; // Garantir que o modal seja exibido
+    resultMessage.innerHTML = resultText + answersHTML;
 
-    // Temporizador para exibir a mensagem de aprovação ou reprovação após 3 segundos
-    setTimeout(function () {
-        var approvalMessage = document.createElement('p');
+    setTimeout(() => {
+        const approvalMessage = document.createElement('p');
+        approvalMessage.className = 'mt-4 text-lg font-bold pulse';
         if (percentage >= 60) {
-            approvalMessage.style.color = 'green';
-            approvalMessage.innerHTML = '<strong>Você está aprovado!</strong>';
+            approvalMessage.className += ' text-green-600';
+            approvalMessage.innerHTML = 'Você está aprovado!';
         } else {
-            approvalMessage.style.color = 'red';
-            approvalMessage.innerHTML = '<strong>Você foi reprovado!</strong>';
+            approvalMessage.className += ' text-red-600';
+            approvalMessage.innerHTML = 'Você foi reprovado!';
         }
         resultMessage.appendChild(approvalMessage);
-
-        // Animação para fazer a mensagem pulsar na tela
-        setInterval(function () {
-            approvalMessage.style.opacity = (approvalMessage.style.opacity === '0' ? '1' : '0');
-        }, 500); // Troca a opacidade a cada 0.5 segundos (500 milissegundos)
     }, 3000);
+
+    modal.classList.remove('hidden');
+    if (timerIntervalId) clearInterval(timerIntervalId);
 }
 
-// Função para fechar o modal
 function closeModal() {
-    var modal = document.getElementById('resultModal');
-    modal.style.display = 'none';
+    document.getElementById('resultModal').classList.add('hidden');
 }
 
-var timerIntervalId = null; // Variável global para armazenar o ID do intervalo do timer
-
-// Função para iniciar o timer
 function startTimer(duration, display) {
-    var timer = duration, minutes, seconds;
-    timerIntervalId = setInterval(function () {
-        minutes = parseInt(timer / 60, 10);
-        seconds = parseInt(timer % 60, 10);
-
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
-
-        display.textContent = minutes + ":" + seconds;
+    let timer = duration;
+    const intervalId = setInterval(() => {
+        const minutes = Math.floor(timer / 60);
+        const seconds = timer % 60;
+        display.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 
         if (--timer < 0) {
-            timer = 0;
-            // Automatizar o clique no botão "Verificar Resposta"
-            document.getElementById("verificar-resposta").click();
+            clearInterval(intervalId);
+            document.getElementById('verificar-resposta').click();
         }
     }, 1000);
-    return timerIntervalId;
+    return intervalId;
 }
 
-// Iniciar o timer ao carregar a página
-/* window.onload = function () {
-    var sixtyMinutes = 60 * 60,
-        display = document.querySelector('#countdown');
-    startTimer(sixtyMinutes, display);
-}; */
-
-// Seleciona todos os checkboxes
-var examCheckboxes = document.querySelectorAll('input[name="exam"]');
-
-// Seleciona todos os checkboxes
-var examCheckboxes = document.querySelectorAll('input[name="exam"]');
-
-// Adiciona um evento de mudança a cada checkbox
-examCheckboxes.forEach(checkbox => {
+document.querySelectorAll('input[name="exam"]').forEach(checkbox => {
     checkbox.addEventListener('change', function() {
-        // Se o checkbox foi selecionado
         if (this.checked) {
-            // Desmarcar todos os outros checkboxes
-            examCheckboxes.forEach(otherCheckbox => {
-                if (otherCheckbox !== this) {
-                    otherCheckbox.checked = false;
-                }
+            document.querySelectorAll('input[name="exam"]').forEach(otherCheckbox => {
+                if (otherCheckbox !== this) otherCheckbox.checked = false;
             });
-
-            // Limpar o intervalo do timer anterior
-            if (timerIntervalId !== null) {
-                clearInterval(timerIntervalId);
-            }
-
-            // Carregar as perguntas para o exame selecionado
             loadQuestions();
         }
     });
+});
+
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' && !document.getElementById('verificar-resposta').disabled) {
+        checkAnswer();
+    }
+    if (event.key === 'Escape') {
+        closeModal();
+    }
 });

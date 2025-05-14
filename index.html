@@ -1,33 +1,88 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Descrição da sua página aqui">
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <meta name="description" content="Simulador CTFL para prática de exames">
+    <title>Simulador CTFL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .option-label:hover {
+            background-color: #e5e7eb;
+        }
+        .option-label input:checked + span {
+            font-weight: bold;
+        }
+        .pulse {
+            animation: pulse 0.5s infinite alternate;
+        }
+        @keyframes pulse {
+            from { opacity: 1; }
+            to { opacity: 0.5; }
+        }
+        .progress-bar {
+            transition: width 0.3s ease;
+        }
+    </style>
 </head>
-<body>
-    <div class="timer">Tempo restante: <span id="countdown">60:00</span></div>
-    <div class="content">
-    <h1 style="text-align: center;">SIMULADOR CTFL</h1>
-    <div id="question"></div>
-    <div id="options"></div>
-    <button onclick="checkAnswer()">Verificar resposta</button>
-    <div id="message"></div>
-    <div id="counter" style="position: absolute; top: 0; right: 0;"></div>
-    <div id="score" style="position: absolute; top: 30px; right: 0;"></div>
-    <div id="resultModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <p id="resultMessage"></p>
+<body class="bg-gray-100 font-sans antialiased">
+    <div class="container mx-auto p-4 max-w-3xl">
+        <header class="flex justify-between items-center mb-6">
+            <h1 class="text-3xl font-bold text-gray-800">Simulador CTFL</h1>
+            <div class="timer text-lg font-semibold text-gray-700">
+                Tempo restante: <span id="countdown">60:00</span>
+            </div>
+        </header>
+
+        <div id="examSelection" class="mb-6 bg-white p-4 rounded-lg shadow">
+            <h2 class="text-lg font-semibold mb-2">Selecione o Exame</h2>
+            <div class="flex flex-col gap-2">
+                <label class="flex items-center gap-2">
+                    <input type="checkbox" name="exam" value="exam1" class="h-4 w-4 text-blue-600">
+                    <span>Exame A</span>
+                </label>
+                <label class="flex items-center gap-2">
+                    <input type="checkbox" name="exam" value="exam2" class="h-4 w-4 text-blue-600">
+                    <span>Exame B</span>
+                </label>
+                <label class="flex items-center gap-2">
+                    <input type="checkbox" name="exam" value="exam3" class="h-4 w-4 text-blue-600">
+                    <span>Exame C</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="mb-4">
+            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                <div id="progressBar" class="bg-blue-600 h-2.5 rounded-full progress-bar" style="width: 0%"></div>
+            </div>
+            <p class="text-sm text-gray-600 mt-1">
+                Progresso: <span id="counter">0/0</span>
+            </p>
+        </div>
+
+        <div id="question" class="bg-white p-6 rounded-lg shadow mb-6"></div>
+        <div id="options" class="bg-white p-6 rounded-lg shadow mb-6"></div>
+
+        <div class="flex justify-center mb-6">
+            <button id="verificar-resposta" onclick="checkAnswer()" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition disabled:bg-gray-400" disabled>
+                Verificar Resposta
+            </button>
+        </div>
+
+        <div id="message" class="hidden bg-yellow-100 p-4 rounded-lg text-yellow-800 mb-6"></div>
+        <div id="score" class="bg-white p-4 rounded-lg shadow hidden">
+            <p><b>Respostas corretas:</b> <span id="correct" class="text-green-600 font-bold">0</span></p>
+            <p><b>Respostas incorretas:</b> <span id="incorrect" class="text-red-600 font-bold">0</span></p>
+        </div>
+
+        <div id="resultModal" class="modal hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+            <div class="modal-content bg-white p-6 rounded-lg shadow-lg max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+                <button class="close float-right text-2xl text-gray-500 hover:text-gray-800" onclick="closeModal()" aria-label="Fechar modal">&times;</button>
+                <div id="resultMessage" class="mt-4"></div>
+            </div>
         </div>
     </div>
-    <div id="examSelection">
-        <label><input type="checkbox" name="exam" value="exam1"> Exame A</label>
-        <label><input type="checkbox" name="exam" value="exam2"> Exame B</label>
-        <label><input type="checkbox" name="exam" value="exam3"> Exame C</label>
-    </div>
-    
 
     <script src="script.js"></script>
 </body>
