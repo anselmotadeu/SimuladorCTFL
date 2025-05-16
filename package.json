@@ -4,8 +4,19 @@
   "description": "Simulador do exame de Qualidade de Software desenvolvido com a intenção de práticas e estudos.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "test:report": "jest --coverage",
+    "test:report:html": "jest && open unit-tests/reports/jest-unit-report.html",
+    "open-report": "open unit-tests/reports/jest-stare/index.html"
   },
   "author": "Anselmo Santos",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "jest-html-reporter": "^4.1.0",
+    "jest-stare": "^2.5.2",
+    "jsdom": "^26.1.0",
+    "util": "^0.12.5"
+  }
 }

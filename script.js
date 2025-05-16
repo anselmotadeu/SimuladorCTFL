@@ -1,3 +1,5 @@
+import { startTimer } from './simulador';
+
 let correctAnswers = 0;
 let incorrectAnswers = 0;
 let totalQuestions = 0;
@@ -32,6 +34,7 @@ function loadQuestions() {
     questions = [];
     let loadedExams = 0;
 
+    // biome-ignore lint/complexity/noForEach: <explanation>
     selectedExamValues.forEach(exam => {
         // Ajuste no caminho do fetch para lidar com arquivos locais
         fetch(`./${exam}.json`)
@@ -86,6 +89,7 @@ function loadNextQuestion() {
     });
 
     verifyButton.disabled = true;
+    // biome-ignore lint/complexity/noForEach: <explanation>
     optionsDiv.querySelectorAll('input').forEach(input => {
         input.addEventListener('change', () => {
             verifyButton.disabled = false;
@@ -107,7 +111,7 @@ function checkAnswer() {
     }
 
     const questionIndex = answeredQuestions;
-    const optionIndex = parseInt(selectedOption.value);
+    const optionIndex = Number.parseInt(selectedOption.value);
     const correctOptionIndex = questions[questionIndex].answer;
 
     if (optionIndex === correctOptionIndex) {
@@ -141,7 +145,7 @@ function showResultModal() {
     const modal = document.getElementById('resultModal');
     const resultMessage = document.getElementById('resultMessage');
     const percentage = (correctAnswers / totalQuestions) * 100;
-    let resultText = `
+    const resultText = `
         <p class="text-lg font-semibold">Resultado Final</p>
         <p>Você acertou ${correctAnswers} de ${totalQuestions} perguntas.</p>
         <p>Percentual de acerto: ${percentage.toFixed(2)}%</p>`;
@@ -149,7 +153,7 @@ function showResultModal() {
     let answersHTML = '<h3 class="mt-4 font-semibold">Revisão das Respostas:</h3><ul class="mt-2">';
     questions.forEach((question, i) => {
         const selectedOption = document.querySelector(`input[name="option${i}"]:checked`);
-        const selectedOptionIndex = selectedOption ? parseInt(selectedOption.value) : -1;
+        const selectedOptionIndex = selectedOption ? Number.parseInt(selectedOption.value) : -1;
         const correctOptionIndex = question.answer;
         const questionText = question.question.replace(/^\d+\.\s*/, '');
 
@@ -194,6 +198,7 @@ function closeModal() {
     document.getElementById('resultModal').classList.add('hidden');
 }
 
+// biome-ignore lint/suspicious/noRedeclare: <explanation>
 function startTimer(duration, display) {
     let timer = duration;
     const intervalId = setInterval(() => {
@@ -209,9 +214,11 @@ function startTimer(duration, display) {
     return intervalId;
 }
 
+// biome-ignore lint/complexity/noForEach: <explanation>
 document.querySelectorAll('input[name="exam"]').forEach(checkbox => {
     checkbox.addEventListener('change', function() {
         if (this.checked) {
+            // biome-ignore lint/complexity/noForEach: <explanation>
             document.querySelectorAll('input[name="exam"]').forEach(otherCheckbox => {
                 if (otherCheckbox !== this) otherCheckbox.checked = false;
             });

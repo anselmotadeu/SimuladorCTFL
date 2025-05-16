@@ -1,0 +1,75 @@
+{
+  "bail": 0,
+  "changedFilesWithAncestor": false,
+  "ci": false,
+  "collectCoverage": true,
+  "collectCoverageFrom": [],
+  "coverageDirectory": "/Users/anselmo.filho/Documents/SimuladorCTFL/coverage",
+  "coverageProvider": "babel",
+  "coverageReporters": [
+    "json",
+    "text",
+    "lcov",
+    "clover"
+  ],
+  "detectLeaks": false,
+  "detectOpenHandles": false,
+  "errorOnDeprecated": false,
+  "expand": false,
+  "findRelatedTests": false,
+  "forceExit": false,
+  "json": false,
+  "lastCommit": false,
+  "listTests": false,
+  "logHeapUsage": false,
+  "maxConcurrency": 5,
+  "maxWorkers": 7,
+  "noStackTrace": false,
+  "nonFlagArgs": [],
+  "notify": false,
+  "notifyMode": "failure-change",
+  "onlyChanged": false,
+  "onlyFailures": false,
+  "openHandlesTimeout": 1000,
+  "passWithNoTests": false,
+  "projects": [],
+  "reporters": [
+    [
+      "default",
+      {}
+    ],
+    [
+      "/Users/anselmo.filho/Documents/SimuladorCTFL/node_modules/jest-stare/lib/index.js",
+      {
+        "resultDir": "unit-tests/reports/jest-stare/",
+        "reportTitle": "📋 Relatório de Testes Unitários - Simulador CTFL",
+        "coverageLink": "../coverage/lcov-report/index.html",
+        "reportHeadline": "📌 Detalhamento dos testes automatizados com Jest",
+        "reportSummary": true,
+        "log": true,
+        "jestStareConfigJson": "jest-stare-config.json",
+        "jestGlobalConfigJson": "jest-global-config.json",
+        "additionalResultsProcessors": [],
+        "resultHtml": "index.html",
+        "resultJson": "jest-results.json"
+      }
+    ]
+  ],
+  "rootDir": "/Users/anselmo.filho/Documents/SimuladorCTFL",
+  "runTestsByPath": false,
+  "seed": 1902054459,
+  "skipFilter": false,
+  "snapshotFormat": {
+    "escapeString": false,
+    "printBasicPrototype": false
+  },
+  "testFailureExitCode": 1,
+  "testPathPattern": "",
+  "testSequencer": "/Users/anselmo.filho/Documents/SimuladorCTFL/node_modules/@jest/test-sequencer/build/index.js",
+  "updateSnapshot": "new",
+  "useStderr": false,
+  "watch": false,
+  "watchAll": false,
+  "watchman": true,
+  "workerThreads": false
+}
