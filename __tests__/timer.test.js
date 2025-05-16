@@ -59,4 +59,17 @@ describe('startTimer()', () => {
 
     console.log('🛑 Timer finalizado corretamente');
   });
+
+  it('não deve lançar erro se display for null', () => {
+    expect(() => startTimer(60, null)).not.toThrow();
+    console.log('⚠️ startTimer() ignorou display null sem erro');
+  });
+
+  it('deve exibir 00:08 corretamente', () => {
+    startTimer(9, display);
+    jest.advanceTimersByTime(1000);
+    expect(display.textContent).toBe('00:08');
+    console.log('⏱️ Timer exibiu corretamente tempo com 1 dígito');
+  });  
+  
 });

@@ -37,4 +37,28 @@ describe('simulador.js', () => {
     expect(simulador.getQuestion(0)).toBeUndefined();
     console.log('🔁 resetState() executado corretamente');
   });
+
+  it('deve retornar undefined para índice inválido', () => {
+    simulador.setQuestions([{ question: 'Q1', options: ['A', 'B'], answer: 0 }]);
+    const result = simulador.getQuestion(5);
+    expect(result).toBeUndefined();
+    console.log('⚠️ Retornou undefined para índice inválido');
+  });
+
+  it('deve ignorar setQuestions com array vazio', () => {
+    simulador.setQuestions([]);
+    expect(simulador.getQuestion(0)).toBeUndefined();
+    console.log('✅ setQuestions() ignorou array vazio corretamente');
+  });  
+
+  it('deve acumular acertos e erros corretamente', () => {
+    simulador.updateStats(true);
+    simulador.updateStats(false);
+    simulador.updateStats(true);
+    const score = simulador.getScore();
+    expect(score.correctAnswers).toBe(2);
+    expect(score.incorrectAnswers).toBe(1);
+    expect(score.answeredQuestions).toBe(3);
+    console.log('📈 Estatísticas acumuladas corretamente');
+  });
 });

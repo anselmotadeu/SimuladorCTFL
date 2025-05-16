@@ -97,7 +97,7 @@
                 <canvas id="tests-canvas" width="100" height="100"></canvas>
                 <h2>Tests</h2>
                 <div class="list-group">
-                    <p id="tests-results" class="list-group-item list-group-item-action">6 passed, 6 total</p>
+                    <p id="tests-results" class="list-group-item list-group-item-action">11 passed, 11 total</p>
                 </div>
             </div>
             <!-- /.col-lg-4 -->
@@ -135,13 +135,13 @@
   &quot;numFailedTestSuites&quot;: 0,
   &quot;numFailedTests&quot;: 0,
   &quot;numPassedTestSuites&quot;: 2,
-  &quot;numPassedTests&quot;: 6,
+  &quot;numPassedTests&quot;: 11,
   &quot;numPendingTestSuites&quot;: 0,
   &quot;numPendingTests&quot;: 0,
   &quot;numRuntimeErrorTestSuites&quot;: 0,
   &quot;numTodoTests&quot;: 0,
   &quot;numTotalTestSuites&quot;: 2,
-  &quot;numTotalTests&quot;: 6,
+  &quot;numTotalTests&quot;: 11,
   &quot;openHandles&quot;: [],
   &quot;snapshot&quot;: {
     &quot;added&quot;: 0,
@@ -159,21 +159,21 @@
     &quot;unmatched&quot;: 0,
     &quot;updated&quot;: 0
   },
-  &quot;startTime&quot;: 1747363821652,
+  &quot;startTime&quot;: 1747365712197,
   &quot;success&quot;: false,
   &quot;testResults&quot;: [
     {
       &quot;leaks&quot;: false,
       &quot;numFailingTests&quot;: 0,
-      &quot;numPassingTests&quot;: 2,
+      &quot;numPassingTests&quot;: 4,
       &quot;numPendingTests&quot;: 0,
       &quot;numTodoTests&quot;: 0,
       &quot;openHandles&quot;: [],
       &quot;perfStats&quot;: {
-        &quot;end&quot;: 1747363822381,
-        &quot;runtime&quot;: 439,
+        &quot;end&quot;: 1747365712987,
+        &quot;runtime&quot;: 463,
         &quot;slow&quot;: false,
-        &quot;start&quot;: 1747363821942
+        &quot;start&quot;: 1747365712524
       },
       &quot;skipped&quot;: false,
       &quot;snapshot&quot;: {
@@ -216,6 +216,36 @@
           &quot;retryReasons&quot;: [],
           &quot;status&quot;: &quot;passed&quot;,
           &quot;title&quot;: &quot;deve parar ao final do tempo&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;startTimer()&quot;
+          ],
+          &quot;duration&quot;: 4,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;startTimer() não deve lançar erro se display for null&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 1,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;não deve lançar erro se display for null&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;startTimer()&quot;
+          ],
+          &quot;duration&quot;: 3,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;startTimer() deve exibir 00:08 corretamente&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 1,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;deve exibir 00:08 corretamente&quot;
         }
       ],
       &quot;failureMessage&quot;: null
@@ -223,15 +253,15 @@
     {
       &quot;leaks&quot;: false,
       &quot;numFailingTests&quot;: 0,
-      &quot;numPassingTests&quot;: 4,
+      &quot;numPassingTests&quot;: 7,
       &quot;numPendingTests&quot;: 0,
       &quot;numTodoTests&quot;: 0,
       &quot;openHandles&quot;: [],
       &quot;perfStats&quot;: {
-        &quot;end&quot;: 1747363822419,
-        &quot;runtime&quot;: 19,
+        &quot;end&quot;: 1747365713042,
+        &quot;runtime&quot;: 34,
         &quot;slow&quot;: false,
-        &quot;start&quot;: 1747363822400
+        &quot;start&quot;: 1747365713008
       },
       &quot;skipped&quot;: false,
       &quot;snapshot&quot;: {
@@ -304,6 +334,51 @@
           &quot;retryReasons&quot;: [],
           &quot;status&quot;: &quot;passed&quot;,
           &quot;title&quot;: &quot;deve resetar todos os dados com resetState()&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;simulador.js&quot;
+          ],
+          &quot;duration&quot;: 0,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;simulador.js deve retornar undefined para índice inválido&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 1,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;deve retornar undefined para índice inválido&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;simulador.js&quot;
+          ],
+          &quot;duration&quot;: 1,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;simulador.js deve ignorar setQuestions com array vazio&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 1,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;deve ignorar setQuestions com array vazio&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;simulador.js&quot;
+          ],
+          &quot;duration&quot;: 0,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;simulador.js deve acumular acertos e erros corretamente&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 3,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;deve acumular acertos e erros corretamente&quot;
         }
       ],
       &quot;failureMessage&quot;: null
@@ -371,7 +446,7 @@
   ],
   &quot;rootDir&quot;: &quot;&#x2F;Users&#x2F;anselmo.filho&#x2F;Documents&#x2F;SimuladorCTFL&quot;,
   &quot;runTestsByPath&quot;: false,
-  &quot;seed&quot;: 1902054459,
+  &quot;seed&quot;: -1638944824,
   &quot;skipFilter&quot;: false,
   &quot;snapshotFormat&quot;: {
     &quot;escapeString&quot;: false,
