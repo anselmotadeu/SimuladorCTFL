@@ -1,1 +1,3 @@
-node_modules
+coverage/
+unit-tests/reports/
+node_modules/
