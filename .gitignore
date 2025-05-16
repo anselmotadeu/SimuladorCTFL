@@ -4,3 +4,4 @@ node_modules/
 index.html
 jest-global-config.json
 jest-results.json
+jest-stare/

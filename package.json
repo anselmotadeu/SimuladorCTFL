@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "test:report": "jest --coverage",
+    "test:report": "jest --coverage --reporters=default --reporters=jest-stare",
     "test:report:html": "jest && open unit-tests/reports/jest-unit-report.html",
-    "open-report": "open unit-tests/reports/jest-stare/index.html"
-  },
+    "open-report": "open unit-tests/reports/jest-stare/index.html",
+    "test:report:log": "jest --coverage | tee unit-tests/reports/test-log.txt"
+  },  
   "author": "Anselmo Santos",
   "license": "ISC",
   "devDependencies": {

@@ -1,0 +1,50 @@
+name: 🧪 Testes Unitários
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  unit-tests:
+    name: 🔍 Rodar testes unitários com cobertura e evidência
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⬇️ Checkout do repositório
+        uses: actions/checkout@v3
+
+      - name: 🔧 Instalar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: 📦 Instalar dependências
+        run: npm install
+
+      - name: 🧪 Executar testes com log
+        run: |
+          mkdir -p unit-tests/reports
+          npm run test:report | tee unit-tests/reports/test-log.txt
+
+      - name: 📁 Salvar relatório HTML do Jest Stare como evidência
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: evidencia-jest-stare
+          path: unit-tests/reports/jest-stare
+
+      - name: 📄 Salvar log da execução dos testes
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: log-testes-unitarios
+          path: unit-tests/reports/test-log.txt
+
+      - name: 📈 Salvar cobertura completa
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: cobertura-jest
+          path: coverage
