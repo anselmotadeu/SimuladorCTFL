@@ -26,7 +26,7 @@ jobs:
         run: npm run test:report
 
       - name: 📁 Salvar relatórios como artefato
-        uses: actions/upload-artifact@v3.1.3
+        uses: actions/upload-artifact@v3
         with:
           name: evidencias-testes-unitarios
           path: |
