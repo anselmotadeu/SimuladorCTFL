@@ -2,13 +2,13 @@
   "numFailedTestSuites": 0,
   "numFailedTests": 0,
   "numPassedTestSuites": 2,
-  "numPassedTests": 11,
+  "numPassedTests": 17,
   "numPendingTestSuites": 0,
   "numPendingTests": 0,
   "numRuntimeErrorTestSuites": 0,
   "numTodoTests": 0,
   "numTotalTestSuites": 2,
-  "numTotalTests": 11,
+  "numTotalTests": 17,
   "openHandles": [],
   "snapshot": {
     "added": 0,
@@ -26,21 +26,21 @@
     "unmatched": 0,
     "updated": 0
   },
-  "startTime": 1747365712197,
+  "startTime": 1747366781580,
   "success": false,
   "testResults": [
     {
       "leaks": false,
       "numFailingTests": 0,
-      "numPassingTests": 4,
+      "numPassingTests": 7,
       "numPendingTests": 0,
       "numTodoTests": 0,
       "openHandles": [],
       "perfStats": {
-        "end": 1747365712987,
-        "runtime": 463,
+        "end": 1747366782375,
+        "runtime": 468,
         "slow": false,
-        "start": 1747365712524
+        "start": 1747366781907
       },
       "skipped": false,
       "snapshot": {
@@ -59,21 +59,6 @@
             "startTimer()"
           ],
           "duration": 26,
-          "failureDetails": [],
-          "failureMessages": [],
-          "fullName": "startTimer() deve atualizar o tempo corretamente",
-          "invocations": 1,
-          "location": null,
-          "numPassingAsserts": 2,
-          "retryReasons": [],
-          "status": "passed",
-          "title": "deve atualizar o tempo corretamente"
-        },
-        {
-          "ancestorTitles": [
-            "startTimer()"
-          ],
-          "duration": 4,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "startTimer() deve parar ao final do tempo",
@@ -113,6 +98,66 @@
           "retryReasons": [],
           "status": "passed",
           "title": "deve exibir 00:08 corretamente"
+        },
+        {
+          "ancestorTitles": [
+            "startTimer()"
+          ],
+          "duration": 3,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "startTimer() deve renderizar 00:00 imediatamente para tempo 0",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "deve renderizar 00:00 imediatamente para tempo 0"
+        },
+        {
+          "ancestorTitles": [
+            "startTimer()"
+          ],
+          "duration": 3,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "startTimer() deve renderizar 00:00 para tempo negativo",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "deve renderizar 00:00 para tempo negativo"
+        },
+        {
+          "ancestorTitles": [
+            "startTimer()"
+          ],
+          "duration": 2,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "startTimer() deve garantir que apenas um timer esteja rodando",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "deve garantir que apenas um timer esteja rodando"
+        },
+        {
+          "ancestorTitles": [
+            "startTimer()"
+          ],
+          "duration": 2,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "startTimer() deve clicar no botão de resposta ao finalizar o tempo",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "deve clicar no botão de resposta ao finalizar o tempo"
         }
       ],
       "failureMessage": null
@@ -120,15 +165,15 @@
     {
       "leaks": false,
       "numFailingTests": 0,
-      "numPassingTests": 7,
+      "numPassingTests": 10,
       "numPendingTests": 0,
       "numTodoTests": 0,
       "openHandles": [],
       "perfStats": {
-        "end": 1747365713042,
-        "runtime": 34,
+        "end": 1747366782425,
+        "runtime": 29,
         "slow": false,
-        "start": 1747365713008
+        "start": 1747366782396
       },
       "skipped": false,
       "snapshot": {
@@ -191,7 +236,7 @@
           "ancestorTitles": [
             "simulador.js"
           ],
-          "duration": 1,
+          "duration": 2,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "simulador.js deve resetar todos os dados com resetState()",
@@ -206,7 +251,7 @@
           "ancestorTitles": [
             "simulador.js"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [],
           "failureMessages": [],
           "fullName": "simulador.js deve retornar undefined para índice inválido",
@@ -246,6 +291,51 @@
           "retryReasons": [],
           "status": "passed",
           "title": "deve acumular acertos e erros corretamente"
+        },
+        {
+          "ancestorTitles": [
+            "simulador.js"
+          ],
+          "duration": 0,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "simulador.js deve retornar undefined para índice negativo em getQuestion()",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "deve retornar undefined para índice negativo em getQuestion()"
+        },
+        {
+          "ancestorTitles": [
+            "simulador.js"
+          ],
+          "duration": 4,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "simulador.js deve lançar erro ao passar valor não array para setQuestions()",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 2,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "deve lançar erro ao passar valor não array para setQuestions()"
+        },
+        {
+          "ancestorTitles": [
+            "simulador.js"
+          ],
+          "duration": 0,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "simulador.js deve ignorar updateStats com valor indefinido ou nulo",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 3,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "deve ignorar updateStats com valor indefinido ou nulo"
         }
       ],
       "failureMessage": null

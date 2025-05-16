@@ -1,3 +1,6 @@
 coverage/
-unit-tests/reports/
+unit-tests/reports/jest-stare/
 node_modules/
+index.html
+jest-global-config.json
+jest-results.json

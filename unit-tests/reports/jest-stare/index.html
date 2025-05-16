@@ -97,7 +97,7 @@
                 <canvas id="tests-canvas" width="100" height="100"></canvas>
                 <h2>Tests</h2>
                 <div class="list-group">
-                    <p id="tests-results" class="list-group-item list-group-item-action">11 passed, 11 total</p>
+                    <p id="tests-results" class="list-group-item list-group-item-action">17 passed, 17 total</p>
                 </div>
             </div>
             <!-- /.col-lg-4 -->
@@ -135,13 +135,13 @@
   &quot;numFailedTestSuites&quot;: 0,
   &quot;numFailedTests&quot;: 0,
   &quot;numPassedTestSuites&quot;: 2,
-  &quot;numPassedTests&quot;: 11,
+  &quot;numPassedTests&quot;: 17,
   &quot;numPendingTestSuites&quot;: 0,
   &quot;numPendingTests&quot;: 0,
   &quot;numRuntimeErrorTestSuites&quot;: 0,
   &quot;numTodoTests&quot;: 0,
   &quot;numTotalTestSuites&quot;: 2,
-  &quot;numTotalTests&quot;: 11,
+  &quot;numTotalTests&quot;: 17,
   &quot;openHandles&quot;: [],
   &quot;snapshot&quot;: {
     &quot;added&quot;: 0,
@@ -159,21 +159,21 @@
     &quot;unmatched&quot;: 0,
     &quot;updated&quot;: 0
   },
-  &quot;startTime&quot;: 1747365712197,
+  &quot;startTime&quot;: 1747366781580,
   &quot;success&quot;: false,
   &quot;testResults&quot;: [
     {
       &quot;leaks&quot;: false,
       &quot;numFailingTests&quot;: 0,
-      &quot;numPassingTests&quot;: 4,
+      &quot;numPassingTests&quot;: 7,
       &quot;numPendingTests&quot;: 0,
       &quot;numTodoTests&quot;: 0,
       &quot;openHandles&quot;: [],
       &quot;perfStats&quot;: {
-        &quot;end&quot;: 1747365712987,
-        &quot;runtime&quot;: 463,
+        &quot;end&quot;: 1747366782375,
+        &quot;runtime&quot;: 468,
         &quot;slow&quot;: false,
-        &quot;start&quot;: 1747365712524
+        &quot;start&quot;: 1747366781907
       },
       &quot;skipped&quot;: false,
       &quot;snapshot&quot;: {
@@ -192,21 +192,6 @@
             &quot;startTimer()&quot;
           ],
           &quot;duration&quot;: 26,
-          &quot;failureDetails&quot;: [],
-          &quot;failureMessages&quot;: [],
-          &quot;fullName&quot;: &quot;startTimer() deve atualizar o tempo corretamente&quot;,
-          &quot;invocations&quot;: 1,
-          &quot;location&quot;: null,
-          &quot;numPassingAsserts&quot;: 2,
-          &quot;retryReasons&quot;: [],
-          &quot;status&quot;: &quot;passed&quot;,
-          &quot;title&quot;: &quot;deve atualizar o tempo corretamente&quot;
-        },
-        {
-          &quot;ancestorTitles&quot;: [
-            &quot;startTimer()&quot;
-          ],
-          &quot;duration&quot;: 4,
           &quot;failureDetails&quot;: [],
           &quot;failureMessages&quot;: [],
           &quot;fullName&quot;: &quot;startTimer() deve parar ao final do tempo&quot;,
@@ -246,6 +231,66 @@
           &quot;retryReasons&quot;: [],
           &quot;status&quot;: &quot;passed&quot;,
           &quot;title&quot;: &quot;deve exibir 00:08 corretamente&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;startTimer()&quot;
+          ],
+          &quot;duration&quot;: 3,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;startTimer() deve renderizar 00:00 imediatamente para tempo 0&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 1,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;deve renderizar 00:00 imediatamente para tempo 0&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;startTimer()&quot;
+          ],
+          &quot;duration&quot;: 3,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;startTimer() deve renderizar 00:00 para tempo negativo&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 1,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;deve renderizar 00:00 para tempo negativo&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;startTimer()&quot;
+          ],
+          &quot;duration&quot;: 2,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;startTimer() deve garantir que apenas um timer esteja rodando&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 1,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;deve garantir que apenas um timer esteja rodando&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;startTimer()&quot;
+          ],
+          &quot;duration&quot;: 2,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;startTimer() deve clicar no botão de resposta ao finalizar o tempo&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 1,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;deve clicar no botão de resposta ao finalizar o tempo&quot;
         }
       ],
       &quot;failureMessage&quot;: null
@@ -253,15 +298,15 @@
     {
       &quot;leaks&quot;: false,
       &quot;numFailingTests&quot;: 0,
-      &quot;numPassingTests&quot;: 7,
+      &quot;numPassingTests&quot;: 10,
       &quot;numPendingTests&quot;: 0,
       &quot;numTodoTests&quot;: 0,
       &quot;openHandles&quot;: [],
       &quot;perfStats&quot;: {
-        &quot;end&quot;: 1747365713042,
-        &quot;runtime&quot;: 34,
+        &quot;end&quot;: 1747366782425,
+        &quot;runtime&quot;: 29,
         &quot;slow&quot;: false,
-        &quot;start&quot;: 1747365713008
+        &quot;start&quot;: 1747366782396
       },
       &quot;skipped&quot;: false,
       &quot;snapshot&quot;: {
@@ -324,7 +369,7 @@
           &quot;ancestorTitles&quot;: [
             &quot;simulador.js&quot;
           ],
-          &quot;duration&quot;: 1,
+          &quot;duration&quot;: 2,
           &quot;failureDetails&quot;: [],
           &quot;failureMessages&quot;: [],
           &quot;fullName&quot;: &quot;simulador.js deve resetar todos os dados com resetState()&quot;,
@@ -339,7 +384,7 @@
           &quot;ancestorTitles&quot;: [
             &quot;simulador.js&quot;
           ],
-          &quot;duration&quot;: 0,
+          &quot;duration&quot;: 1,
           &quot;failureDetails&quot;: [],
           &quot;failureMessages&quot;: [],
           &quot;fullName&quot;: &quot;simulador.js deve retornar undefined para índice inválido&quot;,
@@ -379,6 +424,51 @@
           &quot;retryReasons&quot;: [],
           &quot;status&quot;: &quot;passed&quot;,
           &quot;title&quot;: &quot;deve acumular acertos e erros corretamente&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;simulador.js&quot;
+          ],
+          &quot;duration&quot;: 0,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;simulador.js deve retornar undefined para índice negativo em getQuestion()&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 1,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;deve retornar undefined para índice negativo em getQuestion()&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;simulador.js&quot;
+          ],
+          &quot;duration&quot;: 4,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;simulador.js deve lançar erro ao passar valor não array para setQuestions()&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 2,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;deve lançar erro ao passar valor não array para setQuestions()&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;simulador.js&quot;
+          ],
+          &quot;duration&quot;: 0,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;simulador.js deve ignorar updateStats com valor indefinido ou nulo&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 3,
+          &quot;retryReasons&quot;: [],
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;deve ignorar updateStats com valor indefinido ou nulo&quot;
         }
       ],
       &quot;failureMessage&quot;: null
@@ -446,7 +536,7 @@
   ],
   &quot;rootDir&quot;: &quot;&#x2F;Users&#x2F;anselmo.filho&#x2F;Documents&#x2F;SimuladorCTFL&quot;,
   &quot;runTestsByPath&quot;: false,
-  &quot;seed&quot;: -1638944824,
+  &quot;seed&quot;: -1773218193,
   &quot;skipFilter&quot;: false,
   &quot;snapshotFormat&quot;: {
     &quot;escapeString&quot;: false,

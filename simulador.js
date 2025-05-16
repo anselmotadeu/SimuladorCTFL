@@ -13,6 +13,7 @@ function resetState() {
 }
 
 function updateStats(isCorrect) {
+  if (typeof isCorrect !== 'boolean') return;
   if (isCorrect) {
     correctAnswers++;
   } else {
@@ -31,11 +32,23 @@ function getScore() {
 }
 
 function setQuestions(newQuestions) {
+  if (!Array.isArray(newQuestions)) {
+    throw new TypeError('As perguntas devem estar em um array.');
+  }
+
+  if (newQuestions.length === 0) {
+    console.log('⚠️ Nenhuma pergunta fornecida.');
+    return;
+  }
+
   questions = newQuestions;
   totalQuestions = questions.length;
 }
 
 function getQuestion(index) {
+  if (index < 0 || index >= questions.length) {
+    return undefined;
+  }
   return questions[index];
 }
 

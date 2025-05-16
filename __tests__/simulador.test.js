@@ -61,4 +61,29 @@ describe('simulador.js', () => {
     expect(score.answeredQuestions).toBe(3);
     console.log('📈 Estatísticas acumuladas corretamente');
   });
+
+  it('deve retornar undefined para índice negativo em getQuestion()', () => {
+    simulador.setQuestions([{ question: 'Teste', options: [], answer: 0 }]);
+    const q = simulador.getQuestion(-1);
+    expect(q).toBeUndefined();
+    console.log('⚠️ Índice negativo tratado com sucesso');
+  });
+
+  it('deve lançar erro ao passar valor não array para setQuestions()', () => {
+    expect(() => simulador.setQuestions("texto")).toThrow();
+    expect(() => simulador.setQuestions(123)).toThrow();
+    console.log('❌ setQuestions() rejeitou valores não array');
+  });
+
+  it('deve ignorar updateStats com valor indefinido ou nulo', () => {
+    simulador.resetState();
+    simulador.updateStats(undefined);
+    simulador.updateStats(null);
+    const score = simulador.getScore();
+    expect(score.answeredQuestions).toBe(0);
+    expect(score.correctAnswers).toBe(0);
+    expect(score.incorrectAnswers).toBe(0);
+    console.log('⚠️ updateStats ignorou valores inválidos');
+  });
+
 });
